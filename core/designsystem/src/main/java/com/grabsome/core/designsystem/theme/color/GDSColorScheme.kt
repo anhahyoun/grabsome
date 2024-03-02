@@ -9,6 +9,7 @@ data class GDSColorScheme(
     val blue300: Color,
     val blue400: Color,
     val blue500: Color,
+    val neutral000: Color,
     val neutral100: Color,
     val neutral200: Color,
     val neutral300: Color,

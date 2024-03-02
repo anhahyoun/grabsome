@@ -7,6 +7,7 @@ val color = GDSColorScheme(
     blue300 = Color(0xFF0065FF),
     blue400 = Color(0xFF0052CC),
     blue500 = Color(0xFF0747A6),
+    neutral000 = Color(0xFFFFFFFF),
     neutral100 = Color(0xFFFAFBFC),
     neutral200 = Color(0xFFEBECF0),
     neutral300 = Color(0xFFC1C7D0),
