@@ -21,3 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "grabsome"
 include(":app")
+include(":core:data")
+include(":core:designsystem")
+include(":feature")
