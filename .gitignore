@@ -36,7 +36,7 @@ local.properties
 !/.idea/codeStyles/codeStyleConfig.xml
 
 # Gradle cache
-.gradle
+.gradle/*
 
 # Sandbox stuff
 _sandbox
