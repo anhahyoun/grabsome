@@ -1,5 +1,5 @@
 [versions]
-agp = "8.3.0"
+androidGradlePlugin = "8.3.0"
 firebaseBom = "32.7.3"
 kotlin = "1.9.0"
 coreKtx = "1.12.0"
@@ -39,10 +39,10 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 [plugins]
-androidApplication = { id = "com.android.application", version.ref = "agp" }
+androidApplication = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 jetbrainsKotlinKapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
-androidLibrary = { id = "com.android.library", version.ref = "agp" }
+androidLibrary = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 googleServices = { id = "com.google.gms.google-services", version.ref = "googleServices" }
 firebaseCrashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlytics" }
