@@ -72,8 +72,8 @@ private fun BottomBar(
                 },
                 modifier = modifier,
                 label = { Text(stringResource(id = destination.iconTextId)) },
-                alwaysShowLabel = true,
                 colors = NavigationBarItemDefaults.colors(
+                    indicatorColor = color.neutral100,
                     selectedIconColor = color.neutral900,
                     unselectedIconColor = color.neutral900,
                     selectedTextColor = color.neutral900,
