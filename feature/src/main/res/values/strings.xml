@@ -3,4 +3,6 @@
     <string name="home">홈</string>
     <string name="wish">찜</string>
     <string name="my_page">마이</string>
+    <string name="comment">댓글</string>
+    <string name="view">조회</string>
 </resources>
