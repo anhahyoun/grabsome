@@ -1,7 +1,6 @@
 package com.grabsome.feature.home
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -23,7 +22,7 @@ import com.grabsome.core.designsystem.theme.typography.typography
 import com.grabsome.feature.R
 
 @Composable
-internal fun HomeAppBar(selectedTabType: HomeTabType) {
+internal fun HomeAppBar(selectedTabType: () -> HomeTabType, uiEvent: (HomeUiEvent) -> Unit) {
     Row(
         modifier = Modifier
             .padding(vertical = 2.dp, horizontal = 8.dp)
@@ -31,25 +30,33 @@ internal fun HomeAppBar(selectedTabType: HomeTabType) {
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        HomeAppBarTab(selectedTabType)
+        HomeAppBarTab(selectedTabType, uiEvent)
         HomeAppBarIcons()
     }
 }
 
 @Composable
-private fun HomeAppBarTab(selectedTabType: HomeTabType) {
+private fun HomeAppBarTab(selectedTabType: () -> HomeTabType, uiEvent: (HomeUiEvent) -> Unit) {
     Row {
         Text(
-            modifier = Modifier.padding(vertical = 6.dp, horizontal = 8.5.dp),
+            modifier = Modifier
+                .rippleClickable {
+                    uiEvent.invoke(HomeUiEvent.TabClick(HomeTabType.RECENT))
+                }
+                .padding(vertical = 6.dp, horizontal = 8.5.dp),
             text = stringResource(id = R.string.recent),
             style = typography.titleXLarge,
-            color = if (selectedTabType == HomeTabType.RECENT) color.neutral900 else color.neutral400
+            color = if (selectedTabType() == HomeTabType.RECENT) color.neutral900 else color.neutral400
         )
         Text(
-            modifier = Modifier.padding(vertical = 6.dp, horizontal = 8.5.dp),
+            modifier = Modifier
+                .rippleClickable {
+                    uiEvent.invoke(HomeUiEvent.TabClick(HomeTabType.POPULAR))
+                }
+                .padding(vertical = 6.dp, horizontal = 8.5.dp),
             text = stringResource(id = R.string.popular),
             style = typography.titleXLarge,
-            color = if (selectedTabType == HomeTabType.POPULAR) color.neutral900 else color.neutral400
+            color = if (selectedTabType() == HomeTabType.POPULAR) color.neutral900 else color.neutral400
         )
     }
 }
@@ -84,5 +91,5 @@ private fun HomeAppBarIcons() {
 @Preview(showBackground = true)
 @Composable
 private fun HomeAppBarPreview() {
-    HomeAppBar(HomeTabType.RECENT)
+    HomeAppBar({ HomeTabType.RECENT }, {})
 }

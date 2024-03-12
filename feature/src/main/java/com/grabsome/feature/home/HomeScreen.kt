@@ -3,26 +3,57 @@ package com.grabsome.feature.home
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.grabsome.core.data.model.home.HomeCardModel
 import com.grabsome.core.designsystem.theme.color.color
 
 @Composable
-fun HomeRoute() {
-    HomeScreen()
+fun HomeRoute(viewModel: HomeViewModel = hiltViewModel()) {
+    val selectedTab by viewModel.selectedHomeTab.collectAsState()
+    val cardList by viewModel.homeCardList.collectAsState()
+    HomeScreen(
+        selectedType = { selectedTab },
+        cardList = cardList,
+        uiEvent = viewModel::sendUiEvent
+    )
 }
 
 @Composable
-internal fun HomeScreen() {
+internal fun HomeScreen(
+    selectedType: () -> HomeTabType,
+    cardList: List<HomeCardModel>,
+    uiEvent: (HomeUiEvent) -> Unit
+) {
+    Column(modifier = Modifier.fillMaxSize()) {
+        HomeAppBar(selectedTabType = selectedType, uiEvent)
+        LazyColumn {
+            items(cardList) {
+                HomeCard(model = it)
+                HorizontalDivider(
+                    modifier = Modifier.padding(vertical = 8.dp),
+                    thickness = 1.dp,
+                    color = color.neutral300
+                )
+            }
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun HomeScreenPreview() {
     val model = HomeCardModel(
         profileUrl = "",
-        nickname = "김이나",
+        nickname = "최진국",
         profileDescription = "삼성",
         placeName = "식당 상호명",
         writeDate = "16분전",
@@ -34,28 +65,12 @@ internal fun HomeScreen() {
         viewCount = 10,
         isManager = false
     )
-    val list = List(10) {
+    val cardList = List(10) {
         model
     }
-    val state = rememberScrollState()
-    Column(modifier = Modifier.fillMaxSize()) {
-        HomeAppBar(selectedTabType = HomeTabType.RECENT)
-        Column(Modifier.verticalScroll(state)) {
-            list.forEach {
-                HomeCard(model = it)
-                HorizontalDivider(
-                    modifier = Modifier.padding(vertical = 8.dp),
-                    thickness = 1.dp,
-                    color = color.neutral300
-                )
-            }
-        }
-    }
-
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun HomeScreenPreview() {
-    HomeScreen()
+    HomeScreen(
+        selectedType = { HomeTabType.RECENT },
+        cardList = cardList,
+        uiEvent = {}
+    )
 }
