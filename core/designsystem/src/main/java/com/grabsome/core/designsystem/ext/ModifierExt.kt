@@ -11,7 +11,7 @@ import androidx.compose.ui.graphics.Color
 
 @SuppressLint("ModifierFactoryUnreferencedReceiver")
 inline fun Modifier.rippleClickable(
-    color: Color = com.grabsome.core.designsystem.theme.color.color.neutral300,
+    color: Color = com.grabsome.core.designsystem.theme.color.color.neutral900,
     crossinline onClick: () -> Unit
 ): Modifier = composed {
     clickable(
