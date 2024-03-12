@@ -1,12 +1,14 @@
 package com.grabsome.feature.home
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.grabsome.core.data.model.home.HomeCardModel
 import com.grabsome.core.designsystem.theme.color.color
@@ -17,7 +19,7 @@ fun HomeRoute() {
 }
 
 @Composable
-fun HomeScreen() {
+internal fun HomeScreen() {
     val model = HomeCardModel(
         profileUrl = "",
         nickname = "김이나",
@@ -36,14 +38,24 @@ fun HomeScreen() {
         model
     }
     val state = rememberScrollState()
-    Column(Modifier.verticalScroll(state)) {
-        list.forEach {
-            HomeCard(model = it)
-            HorizontalDivider(
-                modifier = Modifier.padding(vertical = 8.dp),
-                thickness = 1.dp,
-                color = color.neutral300
-            )
+    Column(modifier = Modifier.fillMaxSize()) {
+        HomeAppBar(selectedTabType = HomeTabType.RECENT)
+        Column(Modifier.verticalScroll(state)) {
+            list.forEach {
+                HomeCard(model = it)
+                HorizontalDivider(
+                    modifier = Modifier.padding(vertical = 8.dp),
+                    thickness = 1.dp,
+                    color = color.neutral300
+                )
+            }
         }
     }
+
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun HomeScreenPreview() {
+    HomeScreen()
 }

@@ -5,4 +5,6 @@
     <string name="my_page">마이</string>
     <string name="comment">댓글</string>
     <string name="view">조회</string>
+    <string name="recent">최근</string>
+    <string name="popular">인기</string>
 </resources>
