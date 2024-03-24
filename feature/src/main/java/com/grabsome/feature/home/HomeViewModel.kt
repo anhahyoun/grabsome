@@ -39,6 +39,9 @@ class HomeViewModel @Inject constructor() : ViewModel() {
     fun sendUiEvent(event: HomeUiEvent) {
         when (event) {
             is HomeUiEvent.TabClick -> clickHomeTab(event.selectedTab)
+            is HomeUiEvent.FilterClick ->  {
+                // TODO
+            }
         }
     }
 

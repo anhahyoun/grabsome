@@ -35,6 +35,7 @@ internal fun HomeScreen(
 ) {
     Column(modifier = Modifier.fillMaxSize()) {
         HomeAppBar(selectedTabType = selectedType, uiEvent)
+        HomeFilterBar(onClick = uiEvent) // TODO 선택된 필터가 없다면 스크롤 시 gone 처리
         LazyColumn {
             items(cardList) {
                 HomeCard(model = it)
