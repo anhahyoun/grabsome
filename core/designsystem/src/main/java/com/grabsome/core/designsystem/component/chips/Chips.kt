@@ -3,7 +3,6 @@ package com.grabsome.core.designsystem.component.chips
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -11,12 +10,17 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.grabsome.core.designsystem.ext.rippleClickable
 import com.grabsome.core.designsystem.icon.GrabsomeIcons
 import com.grabsome.core.designsystem.icon.grabsomeiconpack.Checkmark
 import com.grabsome.core.designsystem.icon.grabsomeiconpack.ChevronDown
@@ -33,7 +37,7 @@ fun Chips(
     size: ChipsSize = ChipsSize.MEDIUM,
     text: String,
     isActive: Boolean,
-    onClick: () -> Unit
+    onClick: (Boolean) -> Unit
 ) {
     when (type) {
         ChipsType.FILTER -> ChipsFilter(
@@ -49,7 +53,6 @@ fun Chips(
             selectType = selectType,
             size = size,
             text = text,
-            isActive = isActive,
             onClick = onClick
         )
     }
@@ -61,7 +64,7 @@ private fun ChipsFilter(
     size: ChipsSize,
     text: String,
     isActive: Boolean,
-    onClick: () -> Unit
+    onClick: (Boolean) -> Unit
 ) {
 
     val activeModifier = if (isActive) {
@@ -88,7 +91,7 @@ private fun ChipsFilter(
     Row(
         modifier = modifier
             .clip(RoundedCornerShape(100.dp))
-            .clickable(onClick = onClick)
+            .rippleClickable { onClick.invoke(isActive) }
             .then(activeModifier),
         horizontalArrangement = Arrangement.spacedBy(4.dp),
         verticalAlignment = Alignment.CenterVertically
@@ -114,9 +117,10 @@ private fun ChipsChoice(
     selectType: ChipsSelectType,
     size: ChipsSize,
     text: String,
-    isActive: Boolean,
-    onClick: () -> Unit
+    onClick: (Boolean) -> Unit
 ) {
+    var isActive by remember { mutableStateOf(false) }
+
     val activeModifier = if (isActive) {
         modifier
             .border(1.dp, shape = RoundedCornerShape(100.dp), color = color.blue300)
@@ -141,7 +145,10 @@ private fun ChipsChoice(
     Row(
         modifier = modifier
             .clip(shape = RoundedCornerShape(100.dp))
-            .clickable(onClick = onClick)
+            .rippleClickable {
+                isActive = !isActive
+                onClick.invoke(isActive)
+            }
             .then(activeModifier),
         horizontalArrangement = Arrangement.spacedBy(4.dp),
         verticalAlignment = Alignment.CenterVertically
