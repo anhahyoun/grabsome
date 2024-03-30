@@ -20,3 +20,10 @@ inline fun Modifier.rippleClickable(
         onClick()
     }
 }
+
+@SuppressLint("ModifierFactoryUnreferencedReceiver")
+inline fun Modifier.noRippleClickable(crossinline onClick: () -> Unit): Modifier = composed {
+    clickable(
+        indication = null,
+        interactionSource = remember { MutableInteractionSource() }) { onClick() }
+}
