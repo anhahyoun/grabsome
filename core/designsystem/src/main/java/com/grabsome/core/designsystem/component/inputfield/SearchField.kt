@@ -1,16 +1,22 @@
 package com.grabsome.core.designsystem.component.inputfield
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -47,7 +53,8 @@ fun SearchField(
     }
 
     Row(
-        modifier = modifier
+        modifier = Modifier
+            .fillMaxWidth()
             .background(
                 when (focusState) {
                     Focused -> color.neutral000
@@ -76,30 +83,50 @@ fun SearchField(
             colorFilter = ColorFilter.tint(color = color.neutral400)
         )
 
-        BasicTextField(
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .onFocusChanged {
-                    focusState = if (it.isFocused) {
-                        Focused
-                    } else {
-                        Unfocused
+                .weight(1f)
+                .wrapContentHeight(),
+        ) {
+            BasicTextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .onFocusChanged {
+                        focusState = if (it.isFocused) {
+                            Focused
+                        } else {
+                            Unfocused
+                        }
                     }
-                }
-                .padding(0.dp),
-            value = value,
-            onValueChange = onValueChange,
-            textStyle = searchFieldSize.textStyle.merge(
-                color = when (focusState) {
-                    Focused -> color.neutral900
-                    Unfocused -> color.neutral300
-                    Disable -> color.neutral400
-                }
-            ),
-            singleLine = true,
-            cursorBrush = SolidColor(color.blue300),
-            enabled = enabled
-        )
+                    .padding(0.dp),
+                value = value,
+                onValueChange = onValueChange,
+                textStyle = searchFieldSize.textStyle.merge(
+                    color = when (focusState) {
+                        Focused -> color.neutral900
+                        Unfocused -> color.neutral300
+                        Disable -> color.neutral400
+                    }
+                ),
+                singleLine = true,
+                cursorBrush = SolidColor(color.blue300),
+                enabled = enabled,
+            )
+
+            this@Row.AnimatedVisibility(
+                visible = value.isEmpty() && placeholder != null,
+                enter = fadeIn(),
+                exit = fadeOut()
+            ) {
+                Text(
+                    text = placeholder ?: "",
+                    style = searchFieldSize.textStyle,
+                    color = color.neutral300,
+                )
+            }
+        }
+
         if (focusState == Focused && value.isNotEmpty()) {
             Image(
                 modifier = Modifier
@@ -119,17 +146,21 @@ fun SearchField(
 @Composable
 private fun SearchFieldPreview() {
     var text by remember {
-        mutableStateOf("안녕")
+        mutableStateOf("")
     }
 
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         SearchField(
+            modifier = Modifier.fillMaxWidth(),
             value = text,
+            placeholder = "placeholder",
             onValueChange = { changeText -> text = changeText },
             enabled = true
         )
         SearchField(
+            modifier = Modifier.fillMaxWidth(),
             value = text,
+            placeholder = "placeholder",
             onValueChange = { changeText -> text = changeText },
             enabled = false
         )
