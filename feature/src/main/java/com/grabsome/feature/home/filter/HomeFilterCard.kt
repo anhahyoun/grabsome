@@ -15,6 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.grabsome.core.designsystem.component.chips.Chips
 import com.grabsome.core.designsystem.component.chips.ChipsType
+import com.grabsome.core.designsystem.component.inputfield.SearchField
 import com.grabsome.core.designsystem.theme.color.color
 import com.grabsome.core.designsystem.theme.typography.typography
 
@@ -49,14 +50,22 @@ fun HomeMenuFilterCard(menuList: List<String>) {
 fun HomeRegionFilterCard() {
     Column(
         modifier = Modifier
-            .padding(16.dp)
-            .fillMaxWidth()
+            .padding(vertical = 16.dp, horizontal = 16.dp)
+            .fillMaxWidth(),
     ) {
         Text(
             text = "지역",
             style = typography.titleLarge,
             color = color.neutral900,
             modifier = Modifier.fillMaxWidth(),
+        )
+        SearchField(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 16.dp),
+            placeholder = "주소로 검색",
+            value = "",
+            onValueChange = {}
         )
     }
 }
@@ -95,15 +104,24 @@ fun HomeGenderFilterCard() {
 
 @Preview(showBackground = true)
 @Composable
-private fun HomeFilterCardPreview() {
+private fun HomeMenuFilterPreview() {
+    HomeMenuFilterCard(listOf("한식", "양식", "중식", "일식", "아시안", "샐러드"))
+}
 
-    Column(
-        modifier = Modifier.padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(24.dp)
-    ) {
-        HomeMenuFilterCard(listOf("한식", "양식", "중식", "일식", "아시안", "샐러드"))
-        HomeRegionFilterCard()
-        HomeCountFilterCard()
-        HomeGenderFilterCard()
-    }
+@Preview(showBackground = true)
+@Composable
+private fun HomeRegionFilterCardPreview() {
+    HomeRegionFilterCard()
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun HomeCountFilterCardPreview() {
+    HomeCountFilterCard()
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun HomeGenderFilterCardPreview() {
+    HomeGenderFilterCard()
 }

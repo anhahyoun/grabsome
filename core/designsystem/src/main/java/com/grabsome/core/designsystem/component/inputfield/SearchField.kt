@@ -53,7 +53,7 @@ fun SearchField(
     }
 
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .background(
                 when (focusState) {
@@ -151,14 +151,18 @@ private fun SearchFieldPreview() {
 
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         SearchField(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp),
             value = text,
             placeholder = "placeholder",
             onValueChange = { changeText -> text = changeText },
             enabled = true
         )
         SearchField(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp),
             value = text,
             placeholder = "placeholder",
             onValueChange = { changeText -> text = changeText },
