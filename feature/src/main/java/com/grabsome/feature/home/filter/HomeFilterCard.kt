@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.grabsome.core.designsystem.component.chips.Chips
+import com.grabsome.core.designsystem.component.chips.ChipsSelectType
 import com.grabsome.core.designsystem.component.chips.ChipsType
 import com.grabsome.core.designsystem.component.controls.CheckBox
 import com.grabsome.core.designsystem.component.controls.CheckBoxSize
@@ -161,6 +162,9 @@ fun HomeCountFilterCard() {
 
 @Composable
 fun HomeGenderFilterCard() {
+    val filterList = listOf("성별무관", "남자", "여자")
+    var selectedFilter by rememberSaveable { mutableStateOf(filterList.first()) }
+
     Column(
         modifier = Modifier
             .padding(16.dp)
@@ -172,6 +176,23 @@ fun HomeGenderFilterCard() {
             color = color.neutral900,
             modifier = Modifier.fillMaxWidth(),
         )
+        FlowRow(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 16.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            filterList.forEach { text ->
+                Chips(
+                    text = text,
+                    isActive = selectedFilter == text,
+                    type = ChipsType.CHOICE,
+                    selectType = ChipsSelectType.SINGLE
+                ) {
+                    selectedFilter = text
+                }
+            }
+        }
     }
 }
 
