@@ -9,12 +9,15 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.grabsome.core.data.model.home.HomeCardModel
 import com.grabsome.core.designsystem.theme.color.color
+import com.grabsome.feature.home.filter.HomeFilterFullDialog
 
 @Composable
 fun HomeRoute(viewModel: HomeViewModel = hiltViewModel()) {
@@ -33,9 +36,26 @@ internal fun HomeScreen(
     cardList: List<HomeCardModel>,
     uiEvent: (HomeUiEvent) -> Unit
 ) {
+    val openAlertDialog = remember { mutableStateOf(false) }
+    when {
+        openAlertDialog.value -> {
+            HomeFilterFullDialog(
+                onDismissRequest = { openAlertDialog.value = false },
+            )
+        }
+    }
     Column(modifier = Modifier.fillMaxSize()) {
         HomeAppBar(selectedTabType = selectedType, uiEvent)
-        HomeFilterBar(onClick = uiEvent) // TODO 선택된 필터가 없다면 스크롤 시 gone 처리
+        HomeFilterBar {
+            when (it) {
+                is HomeUiEvent.FilterClick -> {
+                    openAlertDialog.value = true
+                }
+
+                else -> {}
+            }
+            uiEvent(it)
+        } // TODO 선택된 필터가 없다면 스크롤 시 gone 처리
         LazyColumn {
             items(cardList) {
                 HomeCard(model = it)

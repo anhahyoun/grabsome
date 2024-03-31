@@ -1,6 +1,7 @@
 package com.grabsome.feature.home.filter
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,6 +21,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import com.grabsome.core.designsystem.ext.rippleClickable
 import com.grabsome.core.designsystem.icon.GrabsomeIcons
 import com.grabsome.core.designsystem.icon.grabsomeiconpack.Xmark
@@ -27,16 +29,25 @@ import com.grabsome.core.designsystem.theme.color.color
 import com.grabsome.core.designsystem.theme.typography.typography
 
 @Composable
-internal fun HomeFilterFullDialog() {
-    Dialog(onDismissRequest = { /*TODO*/ }) {
-        HomeFilterFullScreen()
+internal fun HomeFilterFullDialog(onDismissRequest: () -> Unit) {
+    Dialog(
+        onDismissRequest = onDismissRequest,
+        properties = DialogProperties(usePlatformDefaultWidth = false)
+    ) {
+        HomeFilterFullScreen {
+            when (it) {
+                HomeFilterUiEvent.CloseClick -> onDismissRequest()
+            }
+        }
     }
 }
 
 @Composable
-private fun HomeFilterFullScreen() {
+private fun HomeFilterFullScreen(onClick: (HomeFilterUiEvent) -> Unit) {
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = color.neutral000),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         Row(
@@ -48,7 +59,7 @@ private fun HomeFilterFullScreen() {
             Image(
                 modifier = Modifier
                     .rippleClickable {
-                        /** TODO */
+                        onClick.invoke(HomeFilterUiEvent.CloseClick)
                     }
                     .size(40.dp)
                     .padding(8.dp),
@@ -95,6 +106,5 @@ private fun HomeFilterFullScreen() {
 @Preview(showBackground = true)
 @Composable
 private fun HomeFilterFullScreenPreview() {
-    HomeFilterFullScreen()
+    HomeFilterFullScreen {}
 }
-
