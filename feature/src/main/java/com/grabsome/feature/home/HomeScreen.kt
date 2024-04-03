@@ -73,18 +73,19 @@ internal fun HomeScreen(
 @Composable
 private fun HomeScreenPreview() {
     val model = HomeCardModel(
-        profileUrl = "",
+        address = "판교동",
         nickname = "최진국",
-        profileDescription = "삼성",
+        job = "삼성",
         placeName = "식당 상호명",
-        writeDate = "16분전",
-        title = "타이틀입니다.",
+        date = "3/15(금) 오후 7:30",
         body = "내용입니다.",
         imageUrlList = listOf(),
         commentCount = 0,
         wishCount = 7,
         viewCount = 10,
-        isManager = false
+        isManager = false,
+        category = "음식점",
+        state = "모집중"
     )
     val cardList = List(10) {
         model
