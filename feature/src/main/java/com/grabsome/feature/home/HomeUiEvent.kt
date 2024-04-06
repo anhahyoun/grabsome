@@ -7,6 +7,7 @@ sealed class HomeUiEvent : UiEvent {
     data class TabClick(val selectedTab: HomeTabType) : HomeUiEvent()
     data class FilterClick(val selectedFilter: FilterType) : HomeUiEvent()
     data class ContentClick(val item: HomeCardModel) : HomeUiEvent()
+    data object SearchClick : HomeUiEvent()
 }
 
 enum class FilterType {

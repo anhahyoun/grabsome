@@ -3,8 +3,10 @@ package com.grabsome.ui.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
-import com.grabsome.feature.home.navigation.HOME_ROUTE
-import com.grabsome.feature.home.navigation.homeScreen
+import com.grabsome.feature.home.navigation.HOME_GRAPH_ROUTE_PATTERN
+import com.grabsome.feature.home.navigation.homeGraph
+import com.grabsome.feature.home.navigation.navigateToSearch
+import com.grabsome.feature.home.navigation.searchScreen
 import com.grabsome.feature.mypage.navigation.myPageScreen
 import com.grabsome.feature.wish.navigation.wishScreen
 import com.grabsome.ui.main.AppState
@@ -13,7 +15,7 @@ import com.grabsome.ui.main.AppState
 fun GrabsomeNavHost(
     appState: AppState,
     modifier: Modifier = Modifier,
-    startDestination: String = HOME_ROUTE,
+    startDestination: String = HOME_GRAPH_ROUTE_PATTERN,
 ) {
     val navController = appState.navController
     NavHost(
@@ -21,7 +23,12 @@ fun GrabsomeNavHost(
         startDestination = startDestination,
         modifier = modifier,
     ) {
-        homeScreen()
+        homeGraph(
+            onSearchClick = navController::navigateToSearch,
+            nestedGraphs = {
+                searchScreen()
+            }
+        )
         wishScreen()
         myPageScreen()
     }

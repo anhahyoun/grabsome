@@ -20,13 +20,26 @@ import com.grabsome.core.designsystem.theme.color.color
 import com.grabsome.feature.home.filter.HomeFilterFullDialog
 
 @Composable
-fun HomeRoute(viewModel: HomeViewModel = hiltViewModel()) {
+fun HomeRoute(
+    onSearchClick: () -> Unit,
+    viewModel: HomeViewModel = hiltViewModel()
+) {
     val selectedTab by viewModel.selectedHomeTab.collectAsState()
     val cardList by viewModel.homeCardList.collectAsState()
     HomeScreen(
         selectedType = { selectedTab },
         cardList = cardList,
-        uiEvent = viewModel::sendUiEvent
+        uiEvent = { event ->
+            when (event) {
+                is HomeUiEvent.SearchClick -> {
+                    onSearchClick()
+                }
+
+                else -> {
+                    viewModel.sendUiEvent(event)
+                }
+            }
+        },
     )
 }
 

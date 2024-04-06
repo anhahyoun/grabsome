@@ -48,7 +48,11 @@ class HomeViewModel @Inject constructor() : ViewModel() {
             }
 
             is HomeUiEvent.ContentClick -> {
-                // TODO 상세 페이지 이동
+                // TODO 상세 페이지 이동 (로그인 안되어 있으면 로그인 창 이동)
+            }
+
+            is HomeUiEvent.SearchClick -> {
+                // TODO 뷰모델에서 특정값으로 이동해야할지 뷰에서 이동해야할지?
             }
         }
     }

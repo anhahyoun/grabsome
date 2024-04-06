@@ -11,7 +11,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import com.grabsome.feature.home.navigation.HOME_ROUTE
-import com.grabsome.feature.home.navigation.navigateToHome
+import com.grabsome.feature.home.navigation.navigateToHomeGraph
 import com.grabsome.feature.mypage.navigation.MY_PAGE_ROUTE
 import com.grabsome.feature.mypage.navigation.navigateToMyPage
 import com.grabsome.feature.wish.navigation.WISH_ROUTE
@@ -48,15 +48,6 @@ class AppState(
             MY_PAGE_ROUTE -> TopLevelDestination.MY_PAGE
             else -> null
         }
-//
-//
-//    val isOffline = networkMonitor.isOnline
-//        .map(Boolean::not)
-//        .stateIn(
-//            scope = coroutineScope,
-//            started = SharingStarted.WhileSubscribed(5_000),
-//            initialValue = false,
-//        )
 
     val topLevelDestinations: List<TopLevelDestination> = TopLevelDestination.entries
 
@@ -70,7 +61,7 @@ class AppState(
         }
 
         when (topLevelDestination) {
-            TopLevelDestination.HOME -> navController.navigateToHome(topLevelNavOptions)
+            TopLevelDestination.HOME -> navController.navigateToHomeGraph(topLevelNavOptions)
             TopLevelDestination.WISH -> navController.navigateToWish(topLevelNavOptions)
             TopLevelDestination.MY_PAGE -> navController.navigateToMyPage(topLevelNavOptions)
         }

@@ -22,7 +22,10 @@ import com.grabsome.core.designsystem.theme.typography.typography
 import com.grabsome.feature.R
 
 @Composable
-internal fun HomeAppBar(selectedTabType: () -> HomeTabType, uiEvent: (HomeUiEvent) -> Unit) {
+internal fun HomeAppBar(
+    selectedTabType: () -> HomeTabType,
+    uiEvent: (HomeUiEvent) -> Unit
+) {
     Row(
         modifier = Modifier
             .padding(vertical = 2.dp, horizontal = 8.dp)
@@ -31,7 +34,7 @@ internal fun HomeAppBar(selectedTabType: () -> HomeTabType, uiEvent: (HomeUiEven
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         HomeAppBarTab(selectedTabType, uiEvent)
-        HomeAppBarIcons()
+        HomeAppBarIcons(uiEvent)
     }
 }
 
@@ -62,7 +65,7 @@ private fun HomeAppBarTab(selectedTabType: () -> HomeTabType, uiEvent: (HomeUiEv
 }
 
 @Composable
-private fun HomeAppBarIcons() {
+private fun HomeAppBarIcons(uiEvent: (HomeUiEvent) -> Unit) {
     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         Image(
             modifier = Modifier
@@ -77,7 +80,7 @@ private fun HomeAppBarIcons() {
         Image(
             modifier = Modifier
                 .rippleClickable {
-                    // TODO
+                    uiEvent(HomeUiEvent.SearchClick)
                 }
                 .padding(8.dp)
                 .size(24.dp),
