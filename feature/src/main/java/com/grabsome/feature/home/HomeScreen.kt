@@ -58,7 +58,7 @@ internal fun HomeScreen(
         } // TODO 선택된 필터가 없다면 스크롤 시 gone 처리
         LazyColumn {
             items(cardList) {
-                HomeCard(model = it)
+                HomeCard(model = it, uiEvent)
                 HorizontalDivider(
                     modifier = Modifier.padding(vertical = 8.dp),
                     thickness = 1.dp,

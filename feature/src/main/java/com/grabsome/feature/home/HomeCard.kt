@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.grabsome.core.data.model.home.HomeCardModel
 import com.grabsome.core.designsystem.component.reaction.ReactionButton
+import com.grabsome.core.designsystem.ext.rippleClickable
 import com.grabsome.core.designsystem.icon.GrabsomeIcons
 import com.grabsome.core.designsystem.icon.grabsomeiconpack.Bubble
 import com.grabsome.core.designsystem.icon.grabsomeiconpack.BubbleFill
@@ -33,9 +34,12 @@ import com.grabsome.core.designsystem.theme.color.color
 import com.grabsome.core.designsystem.theme.typography.typography
 
 @Composable
-fun HomeCard(model: HomeCardModel) {
+fun HomeCard(model: HomeCardModel, onClick: (HomeUiEvent) -> Unit) {
     Column(
         modifier = Modifier
+            .rippleClickable {
+                onClick.invoke(HomeUiEvent.ContentClick(model))
+            }
             .fillMaxWidth()
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -99,7 +103,7 @@ private fun HomeCardBody(model: HomeCardModel) {
                 horizontalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 Text(
-                    text = "${pagerState.currentPage + 1}",
+                    text = "${(pagerState.currentPage + 1).coerceAtMost(pagerState.pageCount)}",
                     style = typography.labelXSmall,
                     color = color.neutral300
                 )
@@ -237,5 +241,5 @@ private fun HomeCarePreview() {
         category = "음식점",
         state = "모집중"
     )
-    HomeCard(model)
+    HomeCard(model) {}
 }

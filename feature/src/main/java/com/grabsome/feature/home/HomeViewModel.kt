@@ -46,6 +46,10 @@ class HomeViewModel @Inject constructor() : ViewModel() {
             is HomeUiEvent.FilterClick -> {
                 // TODO
             }
+
+            is HomeUiEvent.ContentClick -> {
+                // TODO 상세 페이지 이동
+            }
         }
     }
 
