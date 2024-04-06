@@ -24,7 +24,10 @@ class HomeViewModel @Inject constructor() : ViewModel() {
             placeName = "식당 상호명",
             date = "3/15(금) 오후 7:30",
             body = "내용입니다.",
-            imageUrlList = listOf("https://i.namu.wiki/i/6kfaPjBWrl5WQtOkig8o4LaUp2-l1mFGZENCTrS7Q6gT9erdnNEXDLZv9QvbaTeOJfuAwD1ws9DfdtPgj2Zi9Q.webp"),
+            imageUrlList = listOf(
+                "https://i.namu.wiki/i/6kfaPjBWrl5WQtOkig8o4LaUp2-l1mFGZENCTrS7Q6gT9erdnNEXDLZv9QvbaTeOJfuAwD1ws9DfdtPgj2Zi9Q.webp",
+                "https://mblogthumb-phinf.pstatic.net/MjAyMTA0MTJfMjU2/MDAxNjE4MjI4MTMwNjk2.fyRQi14ULqu0L0LjOxfBXGVMUC6zwI7ThQ_OGVU2EWQg.yU5ntI2FtP2oNkKUK0lWZDqmwRCsIlTyf7Rn78jGM0gg.JPEG.ghkdwjdtka/IMG_2379.JPG?type=w800"
+            ),
             commentCount = 0,
             wishCount = 7,
             viewCount = 10,
@@ -40,7 +43,7 @@ class HomeViewModel @Inject constructor() : ViewModel() {
     fun sendUiEvent(event: HomeUiEvent) {
         when (event) {
             is HomeUiEvent.TabClick -> clickHomeTab(event.selectedTab)
-            is HomeUiEvent.FilterClick ->  {
+            is HomeUiEvent.FilterClick -> {
                 // TODO
             }
         }
@@ -56,7 +59,10 @@ class HomeViewModel @Inject constructor() : ViewModel() {
             placeName = "식당 상호명",
             date = "3/15(금) 오후 7:30",
             body = "내용입니다.",
-            imageUrlList = listOf("https://i.namu.wiki/i/6kfaPjBWrl5WQtOkig8o4LaUp2-l1mFGZENCTrS7Q6gT9erdnNEXDLZv9QvbaTeOJfuAwD1ws9DfdtPgj2Zi9Q.webp"),
+            imageUrlList = listOf(
+                "https://i.namu.wiki/i/6kfaPjBWrl5WQtOkig8o4LaUp2-l1mFGZENCTrS7Q6gT9erdnNEXDLZv9QvbaTeOJfuAwD1ws9DfdtPgj2Zi9Q.webp",
+                "https://mblogthumb-phinf.pstatic.net/MjAyMTA0MTJfMjU2/MDAxNjE4MjI4MTMwNjk2.fyRQi14ULqu0L0LjOxfBXGVMUC6zwI7ThQ_OGVU2EWQg.yU5ntI2FtP2oNkKUK0lWZDqmwRCsIlTyf7Rn78jGM0gg.JPEG.ghkdwjdtka/IMG_2379.JPG?type=w800"
+            ),
             commentCount = 0,
             wishCount = 7,
             viewCount = 10,
