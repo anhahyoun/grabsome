@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
@@ -24,11 +26,23 @@ import com.grabsome.core.designsystem.theme.typography.typography
 
 @Composable
 fun SearchRoute(viewModel: SearchViewModel = hiltViewModel()) {
-    SearchScreen()
+    val recentSearchList by viewModel.recentSearchList.collectAsState()
+    SearchScreen(
+        recentSearchList = { recentSearchList },
+        uiEvent = { event ->
+            when (event) {
+                SearchUiEvent.OnRemoveAllRecentSearchClick -> viewModel.removeAllRecentSearch()
+                is SearchUiEvent.OnRemoveRecentSearchClick -> viewModel.removeRecentSearch(event.text)
+            }
+        }
+    )
 }
 
 @Composable
-private fun SearchScreen() {
+private fun SearchScreen(
+    recentSearchList: () -> List<String>,
+    uiEvent: (SearchUiEvent) -> Unit
+) {
     Column(modifier = Modifier.fillMaxSize()) {
         Row(
             modifier = Modifier
@@ -57,12 +71,12 @@ private fun SearchScreen() {
                 textAlign = TextAlign.Center
             )
         }
-        SearchMainScreen()
+        SearchMainScreen(recentSearchList, uiEvent)
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 private fun SearchScreenPreview() {
-    SearchScreen()
+    SearchScreen(recentSearchList = { listOf("마라탕", "국밥", "탕수육", "비빔면") }, {})
 }
