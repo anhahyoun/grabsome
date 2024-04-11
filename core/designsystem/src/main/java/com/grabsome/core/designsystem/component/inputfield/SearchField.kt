@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -42,7 +43,7 @@ import com.grabsome.core.designsystem.theme.color.color
 @Composable
 fun SearchField(
     modifier: Modifier = Modifier,
-    value: String,
+    text: String,
     placeholder: String? = null,
     searchFieldSize: SearchFieldSize = SearchFieldSize.Medium,
     enabled: Boolean = true,
@@ -55,6 +56,7 @@ fun SearchField(
     Row(
         modifier = modifier
             .fillMaxWidth()
+            .height(searchFieldSize.height)
             .background(
                 when (focusState) {
                     Focused -> color.neutral000
@@ -91,6 +93,7 @@ fun SearchField(
         ) {
             BasicTextField(
                 modifier = Modifier
+                    .align(Alignment.Center)
                     .fillMaxWidth()
                     .onFocusChanged {
                         focusState = if (it.isFocused) {
@@ -100,7 +103,7 @@ fun SearchField(
                         }
                     }
                     .padding(0.dp),
-                value = value,
+                value = text,
                 onValueChange = onValueChange,
                 textStyle = searchFieldSize.textStyle.merge(
                     color = when (focusState) {
@@ -115,7 +118,7 @@ fun SearchField(
             )
 
             this@Row.AnimatedVisibility(
-                visible = value.isEmpty() && placeholder != null,
+                visible = text.isEmpty() && placeholder != null,
                 enter = fadeIn(),
                 exit = fadeOut()
             ) {
@@ -127,14 +130,14 @@ fun SearchField(
             }
         }
 
-        if (focusState == Focused && value.isNotEmpty()) {
+        if (focusState == Focused && text.isNotEmpty()) {
             Image(
                 modifier = Modifier
                     .size(16.dp)
                     .rippleClickable {
                         onValueChange.invoke("")
                     },
-                imageVector = GrabsomeIcons.CheckCircleFill,
+                imageVector = GrabsomeIcons.CheckCircleFill, // TODO 변경해야함
                 contentDescription = "검색어 삭제",
                 colorFilter = ColorFilter.tint(color = color.neutral400)
             )
@@ -154,8 +157,8 @@ private fun SearchFieldPreview() {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 8.dp),
-            value = text,
-            placeholder = "placeholder",
+            text = text,
+            placeholder = "한국어",
             onValueChange = { changeText -> text = changeText },
             enabled = true
         )
@@ -163,7 +166,7 @@ private fun SearchFieldPreview() {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 8.dp),
-            value = text,
+            text = text,
             placeholder = "placeholder",
             onValueChange = { changeText -> text = changeText },
             enabled = false

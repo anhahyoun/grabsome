@@ -75,7 +75,7 @@ fun HomeRegionFilterCard() {
                 .fillMaxWidth()
                 .padding(vertical = 16.dp),
             placeholder = "주소로 검색",
-            value = "",
+            text = "",
             onValueChange = {}
         )
     }

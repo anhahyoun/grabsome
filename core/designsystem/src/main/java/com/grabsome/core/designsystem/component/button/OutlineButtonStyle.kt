@@ -1,8 +1,8 @@
 package com.grabsome.core.designsystem.component.button
 
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.grabsome.core.designsystem.theme.color.color
 import com.grabsome.core.designsystem.theme.typography.typography
@@ -14,19 +14,19 @@ data class OutlineButtonStyle(
 
 enum class OutlineButtonSize(
     val textStyle: TextStyle,
-    val paddingValues: PaddingValues
+    val height: Dp
 ) {
     SMALL(
         textStyle = typography.labelMedium,
-        paddingValues = PaddingValues(horizontal = 16.dp, vertical = 11.5.dp)
+        height = 40.dp
     ),
     MEDIUM(
         textStyle = typography.labelLarge,
-        paddingValues = PaddingValues(horizontal = 16.dp, vertical = 14.dp)
+        height = 48.dp
     ),
     LARGE(
         textStyle = typography.labelXLarge,
-        paddingValues = PaddingValues(horizontal = 16.dp, vertical = 17.dp)
+        height = 56.dp
     )
 }
 

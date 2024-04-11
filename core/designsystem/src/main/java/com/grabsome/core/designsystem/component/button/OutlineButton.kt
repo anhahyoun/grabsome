@@ -1,6 +1,9 @@
 package com.grabsome.core.designsystem.component.button
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedButton
@@ -15,12 +18,14 @@ import com.grabsome.core.designsystem.theme.color.color
 fun OutlineButton(
     modifier: Modifier = Modifier,
     text: String,
-    style: OutlineButtonStyle,
+    style: OutlineButtonStyle = OutlineButtonStyle(),
     enabled: Boolean = true,
     onClick: () -> Unit
 ) {
     OutlinedButton(
-        modifier = modifier,
+        modifier = modifier
+            .height(style.size.height)
+            .defaultMinSize(minWidth = 1.dp),
         onClick = onClick,
         shape = RoundedCornerShape(8.dp),
         colors = ButtonDefaults.outlinedButtonColors(
@@ -32,7 +37,7 @@ fun OutlineButton(
             1.dp,
             color = if (enabled) style.color.borderColor else color.neutral400
         ),
-        contentPadding = style.size.paddingValues
+        contentPadding = PaddingValues(vertical = 0.dp, horizontal = 16.dp)
     ) {
         Text(
             text = text,
