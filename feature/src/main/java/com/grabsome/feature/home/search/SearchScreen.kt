@@ -1,12 +1,26 @@
 package com.grabsome.feature.home.search
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.grabsome.core.designsystem.ext.rippleClickable
+import com.grabsome.core.designsystem.icon.GrabsomeIcons
+import com.grabsome.core.designsystem.icon.grabsomeiconpack.ChevronLeft
+import com.grabsome.core.designsystem.theme.color.color
+import com.grabsome.core.designsystem.theme.typography.typography
 
 @Composable
 fun SearchRoute(viewModel: SearchViewModel = hiltViewModel()) {
@@ -16,7 +30,34 @@ fun SearchRoute(viewModel: SearchViewModel = hiltViewModel()) {
 @Composable
 private fun SearchScreen() {
     Column(modifier = Modifier.fillMaxSize()) {
-        Text(text = "검색 화면")
+        Row(
+            modifier = Modifier
+                .padding(horizontal = 8.dp, vertical = 2.dp)
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Image(
+                modifier = Modifier
+                    .rippleClickable {
+                        // TODO
+                    }
+                    .size(40.dp)
+                    .padding(8.dp),
+                imageVector = GrabsomeIcons.ChevronLeft,
+                contentDescription = "뒤로가기",
+                colorFilter = ColorFilter.tint(color = color.neutral900),
+            )
+            Text(
+                text = "검색",
+                style = typography.titleLarge,
+                color = color.neutral900,
+                modifier = Modifier
+                    .padding(end = 40.dp)
+                    .fillMaxWidth(),
+                textAlign = TextAlign.Center
+            )
+        }
+        SearchMainScreen()
     }
 }
 
