@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.grabsome.core.designsystem.ext.toDp
 import com.grabsome.core.designsystem.theme.color.color
 
 @Composable
@@ -41,7 +42,7 @@ fun OutlineButton(
     ) {
         Text(
             text = text,
-            style = style.size.textStyle,
+            style = style.size.textStyle.toDp(),
             color = if (enabled) style.color.textColor else color.neutral400
         )
     }

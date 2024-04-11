@@ -35,6 +35,7 @@ import com.grabsome.core.designsystem.component.inputfield.InputFieldState.Disab
 import com.grabsome.core.designsystem.component.inputfield.InputFieldState.Focused
 import com.grabsome.core.designsystem.component.inputfield.InputFieldState.Unfocused
 import com.grabsome.core.designsystem.ext.rippleClickable
+import com.grabsome.core.designsystem.ext.toDp
 import com.grabsome.core.designsystem.icon.GrabsomeIcons
 import com.grabsome.core.designsystem.icon.grabsomeiconpack.CheckCircleFill
 import com.grabsome.core.designsystem.icon.grabsomeiconpack.Magnifyingglass
@@ -111,7 +112,7 @@ fun SearchField(
                         Unfocused -> color.neutral300
                         Disable -> color.neutral400
                     }
-                ),
+                ).toDp(),
                 singleLine = true,
                 cursorBrush = SolidColor(color.blue300),
                 enabled = enabled,
@@ -124,7 +125,7 @@ fun SearchField(
             ) {
                 Text(
                     text = placeholder ?: "",
-                    style = searchFieldSize.textStyle,
+                    style = searchFieldSize.textStyle.toDp(),
                     color = color.neutral300,
                 )
             }
