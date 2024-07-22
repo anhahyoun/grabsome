@@ -37,14 +37,41 @@ fun SearchMainScreen(
 ) {
     val list = recentSearchList()
     LazyColumn(modifier = Modifier.fillMaxSize()) {
-        item {
-            SearchInput(uiEvent = uiEvent)
-        }
+        item { SearchInput() }
         if (list.isNotEmpty()) {
             item { RecentSearchesTitle(uiEvent) }
             items(list) {
                 RecentSearches(it, uiEvent)
             }
+        }
+    }
+}
+
+@Composable
+private fun SearchInput() {
+    var searchInputText by rememberSaveable {
+        mutableStateOf("")
+    }
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        SearchField(
+            modifier = Modifier.weight(1f),
+            text = searchInputText,
+            placeholder = "검색어를 입력해주세요"
+        ) {
+            searchInputText = it
+        }
+        OutlineButton(
+            text = "검색",
+            style = OutlineButtonStyle(size = OutlineButtonSize.SMALL),
+            enabled = searchInputText.isNotEmpty()
+        ) {
+            // TODO 검색 결과 이동
         }
     }
 }

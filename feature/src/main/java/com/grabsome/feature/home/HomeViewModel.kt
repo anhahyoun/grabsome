@@ -26,11 +26,7 @@ class HomeViewModel @Inject constructor() : ViewModel() {
             body = "내용입니다.",
             imageUrlList = listOf(
                 "https://i.namu.wiki/i/6kfaPjBWrl5WQtOkig8o4LaUp2-l1mFGZENCTrS7Q6gT9erdnNEXDLZv9QvbaTeOJfuAwD1ws9DfdtPgj2Zi9Q.webp",
-                "https://mblogthumb-phinf.pstatic.net/MjAyMTA0MTJfMjU2/MDAxNjE4MjI4MTMwNjk2.fyRQi14ULqu0L0LjOxfBXGVMUC6zwI7ThQ_OGVU2EWQg.yU5ntI2FtP2oNkKUK0lWZDqmwRCsIlTyf7Rn78jGM0gg.JPEG.ghkdwjdtka/IMG_2379.JPG?type=w800",
-                "https://blog.kakaocdn.net/dn/bezjux/btqCX8fuOPX/6uq138en4osoKRq9rtbEG0/img.jpg",
-                "https://mblogthumb-phinf.pstatic.net/MjAyMTAxMTJfMTI2/MDAxNjEwNDE3OTAxNTU4.b5gdWuqbuXOJv8fnKIoLc7yiuLxMlM254Qtme9ErMR0g.SVCWBa5pZgbitLqy89qd03SZcUK7bpTvNp71wmphYn8g.JPEG.sosohan_n/IMG_0594.JPG?type=w800",
-                "https://teenstudio.app/data/board/post/761633150.png",
-                "https://upload2.inven.co.kr/upload/2015/04/02/bbs/i10148770964.jpg?MW=800"
+                "https://mblogthumb-phinf.pstatic.net/MjAyMTA0MTJfMjU2/MDAxNjE4MjI4MTMwNjk2.fyRQi14ULqu0L0LjOxfBXGVMUC6zwI7ThQ_OGVU2EWQg.yU5ntI2FtP2oNkKUK0lWZDqmwRCsIlTyf7Rn78jGM0gg.JPEG.ghkdwjdtka/IMG_2379.JPG?type=w800"
             ),
             commentCount = 0,
             wishCount = 7,
@@ -39,10 +35,9 @@ class HomeViewModel @Inject constructor() : ViewModel() {
             category = "음식점",
             state = "모집중"
         )
-//        _homeCardList.value = List(10) {
-//            model
-//        }
-        _homeCardList.value = listOf(model)
+        _homeCardList.value = List(10) {
+            model
+        }
     }
 
     fun sendUiEvent(event: HomeUiEvent) {
@@ -74,11 +69,7 @@ class HomeViewModel @Inject constructor() : ViewModel() {
             body = "내용입니다.",
             imageUrlList = listOf(
                 "https://i.namu.wiki/i/6kfaPjBWrl5WQtOkig8o4LaUp2-l1mFGZENCTrS7Q6gT9erdnNEXDLZv9QvbaTeOJfuAwD1ws9DfdtPgj2Zi9Q.webp",
-                "https://mblogthumb-phinf.pstatic.net/MjAyMTA0MTJfMjU2/MDAxNjE4MjI4MTMwNjk2.fyRQi14ULqu0L0LjOxfBXGVMUC6zwI7ThQ_OGVU2EWQg.yU5ntI2FtP2oNkKUK0lWZDqmwRCsIlTyf7Rn78jGM0gg.JPEG.ghkdwjdtka/IMG_2379.JPG?type=w800",
-                "https://blog.kakaocdn.net/dn/bezjux/btqCX8fuOPX/6uq138en4osoKRq9rtbEG0/img.jpg",
-                "https://mblogthumb-phinf.pstatic.net/MjAyMTAxMTJfMTI2/MDAxNjEwNDE3OTAxNTU4.b5gdWuqbuXOJv8fnKIoLc7yiuLxMlM254Qtme9ErMR0g.SVCWBa5pZgbitLqy89qd03SZcUK7bpTvNp71wmphYn8g.JPEG.sosohan_n/IMG_0594.JPG?type=w800",
-                "https://teenstudio.app/data/board/post/761633150.png",
-                "https://upload2.inven.co.kr/upload/2015/04/02/bbs/i10148770964.jpg?MW=800"
+                "https://mblogthumb-phinf.pstatic.net/MjAyMTA0MTJfMjU2/MDAxNjE4MjI4MTMwNjk2.fyRQi14ULqu0L0LjOxfBXGVMUC6zwI7ThQ_OGVU2EWQg.yU5ntI2FtP2oNkKUK0lWZDqmwRCsIlTyf7Rn78jGM0gg.JPEG.ghkdwjdtka/IMG_2379.JPG?type=w800"
             ),
             commentCount = 0,
             wishCount = 7,
@@ -87,8 +78,7 @@ class HomeViewModel @Inject constructor() : ViewModel() {
             category = "음식점",
             state = "모집중"
         )
-//        _homeCardList.value = List(10) { model }
-        _homeCardList.value = listOf(model)
+        _homeCardList.value = List(10) { model }
     }
 
 }
