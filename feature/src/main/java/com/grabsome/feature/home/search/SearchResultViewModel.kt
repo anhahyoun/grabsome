@@ -8,41 +8,17 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.getAndUpdate
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+
 @HiltViewModel
-class SearchViewModel @Inject constructor() : ViewModel() {
+class SearchResultViewModel @Inject constructor() : ViewModel() {
 
-    private val _recentSearchList = MutableStateFlow<List<String>>(mutableListOf())
-    val recentSearchList: StateFlow<List<String>> = _recentSearchList.asStateFlow()
+    private val _searchResultList = MutableStateFlow<List<HomeCardModel>>(mutableListOf())
+    val searchResultList: StateFlow<List<HomeCardModel>> = _searchResultList.asStateFlow()
 
-    private val _searchState: MutableStateFlow<SearchUiState> =
-        MutableStateFlow(SearchUiState.SearchMain(recentSearchList))
-    val searchState: StateFlow<SearchUiState> = _searchState.asStateFlow()
-
-    init {
-        getRecentSearchList()
-    }
-
-    private fun getRecentSearchList() {
-        _recentSearchList.value = mutableListOf("마라탕", "국밥", "탕수육", "비빔면")
-    }
-
-    fun removeRecentSearch(text: String) {
-        _recentSearchList.getAndUpdate { list ->
-            list.filter { it != text }
-        }
-    }
-
-    fun removeAllRecentSearch() {
-        _recentSearchList.getAndUpdate {
-            emptyList()
-        }
-    }
-
-    fun clickSearch(param: String) {
+    fun getSearchList(param: String) {
         viewModelScope.launch {
             delay(300)
             val model = HomeCardModel(
@@ -63,13 +39,7 @@ class SearchViewModel @Inject constructor() : ViewModel() {
                 category = "음식점",
                 state = "모집중"
             )
-            _searchState.value = SearchUiState.SearchResult(cardList = List(10) { model })
+            _searchResultList.value = List(10) { model }
         }
     }
-}
-
-sealed class SearchUiState {
-    data class SearchMain(val recentList: StateFlow<List<String>>) : SearchUiState()
-    data object SearchResultEmpty : SearchUiState()
-    data class SearchResult(val cardList: List<HomeCardModel>) : SearchUiState()
 }

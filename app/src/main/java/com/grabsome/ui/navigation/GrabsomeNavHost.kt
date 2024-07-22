@@ -6,7 +6,7 @@ import androidx.navigation.compose.NavHost
 import com.grabsome.feature.home.navigation.HOME_GRAPH_ROUTE_PATTERN
 import com.grabsome.feature.home.navigation.homeGraph
 import com.grabsome.feature.home.navigation.navigateToSearch
-import com.grabsome.feature.home.navigation.searchScreen
+import com.grabsome.feature.home.search.SearchMainScreen
 import com.grabsome.feature.mypage.navigation.myPageScreen
 import com.grabsome.feature.wish.navigation.wishScreen
 import com.grabsome.ui.main.AppState
@@ -26,7 +26,7 @@ fun GrabsomeNavHost(
         homeGraph(
             onSearchClick = navController::navigateToSearch,
             nestedGraphs = {
-                searchScreen()
+//                SearchMainScreen()
             }
         )
         wishScreen()
